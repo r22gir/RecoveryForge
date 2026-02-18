@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Configuration (user-specific)
+config/user_*.yaml
+config/local_*.yaml
+
+# Recovery output
+recovered_files/
+output/
+temp/
+tmp/
+
+# Documentation builds
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# RecoveryForge specific
+scans/
+recovery_db/
+reports/
+*.recovery
+*.scan

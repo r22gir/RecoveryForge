@@ -1,0 +1,63 @@
+# Core Dependencies
+PyQt6==6.6.1
+PyQt6-Qt6==6.6.1
+PyQt6-sip==13.6.0
+
+# Data Processing
+numpy==1.26.3
+pandas==2.1.4
+
+# Image Processing
+Pillow==10.2.0
+opencv-python==4.9.0.80
+
+# File Analysis
+python-magic==0.4.27
+exifread==3.0.0
+PyPDF2==3.0.1
+
+# Hashing & Deduplication
+ssdeep==3.4
+xxhash==3.4.1
+
+# OCR
+pytesseract==0.3.10
+
+# SMART Monitoring
+pySMART==1.3.0
+
+# Visualization
+matplotlib==3.8.2
+plotly==5.18.0
+
+# Database
+sqlalchemy==2.0.25
+
+# Utilities
+tqdm==4.66.1
+psutil==5.9.8
+colorama==0.4.6
+humanize==4.9.0
+
+# Configuration
+pyyaml==6.0.1
+configparser==6.0.0
+
+# Logging
+loguru==0.7.2
+
+# Testing (optional)
+pytest==7.4.4
+pytest-cov==4.1.0
+pytest-qt==4.3.1
+
+# ML/AI (optional - for advanced features)
+# Uncomment if you want AI-powered tagging
+# torch==2.1.2
+# torchvision==0.16.2
+# ultralytics==8.1.0  # YOLO v8
+
+# Development Tools (optional)
+# black==23.12.1
+# flake8==7.0.0
+# mypy==1.8.0
