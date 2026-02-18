@@ -5,6 +5,18 @@ All notable changes to RecoveryForge will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2024-02-18
+
+### Security
+- **CRITICAL**: Updated Pillow from 10.2.0 to 10.3.0 to patch buffer overflow vulnerability (CVE)
+  - Affected versions: < 10.3.0
+  - Fixed: Buffer overflow vulnerability
+  - Impact: High - potential for arbitrary code execution
+  - Action: All users should update immediately
+
+### Changed
+- Bumped Pillow dependency to 10.3.0 (security patch)
+
 ## [1.0.0] - 2024-02-18
 
 ### Added
