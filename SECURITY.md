@@ -14,12 +14,45 @@ This document tracks security vulnerabilities and patches for RecoveryForge.
 
 ## Resolved Vulnerabilities
 
+### [RESOLVED] Pillow Out-of-Bounds Write in PSD Loading - CVE (Feb 18, 2024)
+
+**Severity**: HIGH  
+**Status**: ✅ PATCHED in v1.0.2  
+**Affected Versions**: v1.0.0 - v1.0.1 (using Pillow 10.2.0 - 10.3.0)  
+**Patched Versions**: v1.0.2+ (using Pillow 12.1.1+)
+
+**Description**:
+Pillow versions from 10.3.0 to < 12.1.1 contain an out-of-bounds write vulnerability when loading PSD (Photoshop) images that could lead to memory corruption and potential code execution.
+
+**Impact**:
+- Potential for memory corruption
+- Could affect PSD image processing operations
+- Risk of arbitrary code execution
+- High severity security risk
+
+**Mitigation**:
+Update to RecoveryForge v1.0.2 or manually update Pillow:
+```bash
+pip install --upgrade Pillow>=12.1.1
+```
+
+**Timeline**:
+- **Discovered**: Feb 18, 2024
+- **Patched**: Feb 18, 2024 (same day)
+- **Released**: v1.0.2
+
+**References**:
+- Pillow Security Advisory
+- RecoveryForge CHANGELOG.md
+
+---
+
 ### [RESOLVED] Pillow Buffer Overflow - CVE (Feb 18, 2024)
 
 **Severity**: HIGH  
-**Status**: ✅ PATCHED in v1.0.1  
+**Status**: ✅ PATCHED in v1.0.2 (initially v1.0.1, but that version still had issues)  
 **Affected Versions**: v1.0.0 (using Pillow 10.2.0)  
-**Patched Versions**: v1.0.1+ (using Pillow 10.3.0+)
+**Patched Versions**: v1.0.2+ (using Pillow 12.1.1+)
 
 **Description**:
 Pillow versions prior to 10.3.0 contain a buffer overflow vulnerability that could potentially allow arbitrary code execution.
@@ -30,15 +63,16 @@ Pillow versions prior to 10.3.0 contain a buffer overflow vulnerability that cou
 - High severity security risk
 
 **Mitigation**:
-Update to RecoveryForge v1.0.1 or manually update Pillow:
+Update to RecoveryForge v1.0.2 or manually update Pillow:
 ```bash
-pip install --upgrade Pillow>=10.3.0
+pip install --upgrade Pillow>=12.1.1
 ```
 
 **Timeline**:
 - **Discovered**: Feb 18, 2024
-- **Patched**: Feb 18, 2024 (same day)
-- **Released**: v1.0.1
+- **Initially Patched**: Feb 18, 2024 (v1.0.1 to 10.3.0)
+- **Fully Patched**: Feb 18, 2024 (v1.0.2 to 12.1.1)
+- **Released**: v1.0.2
 
 **References**:
 - Pillow Security Advisory
@@ -72,7 +106,8 @@ If you discover a security vulnerability in RecoveryForge:
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.1   | ✅ Yes             |
+| 1.0.2   | ✅ Yes (current)   |
+| 1.0.1   | ⚠️ Security update required |
 | 1.0.0   | ⚠️ Security update required |
 | < 1.0   | ❌ No              |
 
@@ -101,8 +136,8 @@ RecoveryForge relies on several dependencies. We:
 - Use version pinning to ensure reproducibility
 - Test updates before release
 
-**Current Dependencies** (v1.0.1):
-- ✅ Pillow 10.3.0 (patched)
+**Current Dependencies** (v1.0.2):
+- ✅ Pillow 12.1.1 (fully patched)
 - ✅ PyQt6 6.6.1 (latest)
 - ✅ All other dependencies up-to-date
 
@@ -124,12 +159,18 @@ We use:
 
 ## Security Changelog
 
+### v1.0.2 (2024-02-18)
+- 🔒 **SECURITY**: Updated Pillow to 12.1.1 (out-of-bounds write patch)
+- 🔒 Multiple Pillow vulnerabilities now fully resolved
+
 ### v1.0.1 (2024-02-18)
 - 🔒 **SECURITY**: Updated Pillow to 10.3.0 (buffer overflow patch)
+- ⚠️ Note: This version still contained vulnerabilities, superseded by v1.0.2
 
 ### v1.0.0 (2024-02-18)
 - Initial release
 - Security review completed
+- ⚠️ Contained Pillow vulnerabilities, update to v1.0.2 required
 
 ---
 
