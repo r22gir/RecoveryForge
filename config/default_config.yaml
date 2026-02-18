@@ -1,0 +1,149 @@
+# Default configuration for RecoveryForge
+
+# Scanner settings
+scanner:
+  # Chunk size for reading data (bytes)
+  chunk_size: 1048576  # 1MB
+  
+  # Maximum threads for parallel scanning
+  max_threads: 4
+  
+  # Enable fragment recovery
+  fragment_recovery: true
+  
+  # Minimum fragment size (bytes)
+  min_fragment_size: 512
+
+# File carver settings
+file_carver:
+  # Maximum file size to extract (bytes)
+  # Set to 0 for unlimited
+  max_file_size: 104857600  # 100MB
+  
+  # Verify file integrity after extraction
+  verify_integrity: true
+  
+  # Calculate quality scores
+  calculate_quality: true
+
+# Output settings
+output:
+  # Default output directory
+  default_dir: "~/RecoveredFiles"
+  
+  # Organize files by category
+  organize_by_category: true
+  
+  # Create date-based subdirectories
+  organize_by_date: false
+  
+  # Preserve original folder structure
+  preserve_structure: false
+
+# Analysis settings
+analysis:
+  # Extract metadata
+  extract_metadata: true
+  
+  # Run content analysis
+  analyze_content: true
+  
+  # Calculate file hashes
+  calculate_hashes: true
+  
+  # OCR on documents (requires Tesseract)
+  enable_ocr: false
+
+# Intelligence settings
+intelligence:
+  # Enable drive health monitoring
+  monitor_health: true
+  
+  # Enable deduplication
+  enable_deduplication: true
+  
+  # Deduplication method: exact, fuzzy, metadata
+  dedup_method: "exact"
+  
+  # Fuzzy similarity threshold (0-100)
+  fuzzy_threshold: 80
+
+# UI settings
+ui:
+  # Theme: dark, light
+  theme: "dark"
+  
+  # Update interval (ms)
+  update_interval: 1000
+  
+  # Show advanced options
+  show_advanced: false
+  
+  # Confirm before actions
+  confirm_actions: true
+
+# Logging settings
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
+  
+  # Log to file
+  log_to_file: true
+  
+  # Log directory
+  log_dir: "logs"
+  
+  # Keep logs for days
+  keep_days: 30
+
+# Performance settings
+performance:
+  # Maximum memory usage (MB)
+  # Set to 0 for automatic
+  max_memory: 0
+  
+  # Buffer size for I/O (bytes)
+  buffer_size: 8192
+  
+  # Enable caching
+  enable_cache: true
+  
+  # Cache size (MB)
+  cache_size: 256
+
+# Advanced settings
+advanced:
+  # Filter system files
+  filter_system_files: true
+  
+  # Minimum file size to recover (bytes)
+  min_file_size: 0
+  
+  # Skip files with low quality score
+  skip_low_quality: false
+  
+  # Quality threshold (0-100)
+  quality_threshold: 30
+  
+  # Enable AI features (requires additional dependencies)
+  enable_ai: false
+  
+  # AI model path
+  ai_model_path: "models/"
+
+# Reporting settings
+reporting:
+  # Auto-generate report after scan
+  auto_generate: true
+  
+  # Report format: html, csv, json, all
+  format: "html"
+  
+  # Report directory
+  report_dir: "reports"
+  
+  # Include drive health in report
+  include_health: true
+  
+  # Include file list in report
+  include_files: true
