@@ -9,6 +9,7 @@ Dropbox, and iCloud.
 import logging
 import os
 import platform
+import re
 import sqlite3
 from pathlib import Path
 from typing import List, Optional, Dict
@@ -16,6 +17,26 @@ from dataclasses import dataclass, field
 
 
 logger = logging.getLogger(__name__)
+
+# Allowlists for each service's known table names
+_GDRIVE_TABLES = frozenset(("local_entry", "entry", "file_entry"))
+_ONEDRIVE_TABLES = frozenset(("SyncTokenData", "LocalItem", "Item", "items"))
+_DROPBOX_TABLES = frozenset(("file_journal", "block_cache", "filecache"))
+
+_SAFE_IDENTIFIER_RE = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*$')
+
+
+def _safe_table_name(name: str, allowlist: frozenset) -> str:
+    """
+    Validate *name* against an allowlist and safe identifier pattern.
+
+    Raises ValueError if the name is not acceptable.
+    """
+    if name not in allowlist:
+        raise ValueError(f"Table name '{name}' is not in the allowlist.")
+    if not _SAFE_IDENTIFIER_RE.match(name):
+        raise ValueError(f"Table name '{name}' contains unsafe characters.")
+    return name
 
 
 @dataclass
@@ -271,8 +292,9 @@ class CloudCacheParser:
         try:
             cursor = conn.cursor()
             # Try common schema; exact column names vary by Drive version
-            for table in ("local_entry", "entry", "file_entry"):
+            for table_candidate in ("local_entry", "entry", "file_entry"):
                 try:
+                    table = _safe_table_name(table_candidate, _GDRIVE_TABLES)
                     cursor.execute(f"SELECT * FROM {table} LIMIT 0")
                     cols = [d[0].lower() for d in cursor.description]
                     name_col = next((c for c in cols if "name" in c), None)
@@ -291,7 +313,7 @@ class CloudCacheParser:
                             service="google_drive",
                         ))
                     break
-                except sqlite3.OperationalError:
+                except (sqlite3.OperationalError, ValueError):
                     continue
         finally:
             conn.close()
@@ -303,8 +325,9 @@ class CloudCacheParser:
         conn = sqlite3.connect(db_path)
         try:
             cursor = conn.cursor()
-            for table in ("SyncTokenData", "LocalItem", "Item", "items"):
+            for table_candidate in ("SyncTokenData", "LocalItem", "Item", "items"):
                 try:
+                    table = _safe_table_name(table_candidate, _ONEDRIVE_TABLES)
                     cursor.execute(f"SELECT * FROM {table} LIMIT 0")
                     cols = [d[0].lower() for d in cursor.description]
                     name_col = next((c for c in cols if "name" in c or "filename" in c), None)
@@ -323,7 +346,7 @@ class CloudCacheParser:
                             service="onedrive",
                         ))
                     break
-                except sqlite3.OperationalError:
+                except (sqlite3.OperationalError, ValueError):
                     continue
         finally:
             conn.close()
@@ -335,8 +358,9 @@ class CloudCacheParser:
         conn = sqlite3.connect(db_path)
         try:
             cursor = conn.cursor()
-            for table in ("file_journal", "block_cache", "filecache"):
+            for table_candidate in ("file_journal", "block_cache", "filecache"):
                 try:
+                    table = _safe_table_name(table_candidate, _DROPBOX_TABLES)
                     cursor.execute(f"SELECT * FROM {table} LIMIT 0")
                     cols = [d[0].lower() for d in cursor.description]
                     path_col = next((c for c in cols if "path" in c or "local_path" in c), None)
@@ -354,7 +378,7 @@ class CloudCacheParser:
                             service="dropbox",
                         ))
                     break
-                except sqlite3.OperationalError:
+                except (sqlite3.OperationalError, ValueError):
                     continue
         finally:
             conn.close()
