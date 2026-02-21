@@ -22,6 +22,7 @@ xxhash==3.4.1
 
 # OCR
 pytesseract==0.3.10
+pdf2image==1.16.0
 
 # SMART Monitoring
 pySMART==1.3.0
@@ -56,6 +57,19 @@ pytest-qt==4.3.1
 # torch==2.1.2
 # torchvision==0.16.2
 # ultralytics==8.1.0  # YOLO v8
+# onnxruntime>=1.17.0
+# scikit-learn>=1.4.0
+
+# Cloud parsing (optional)
+# google-api-python-client  # Google Drive API
+# msal                      # OneDrive auth
+
+# File repair
+olefile==0.46
+python-docx==0.8.11
+openpyxl==3.1.0
+rarfile==4.1
+py7zr==0.20.0
 
 # Development Tools (optional)
 # black==23.12.1
